@@ -1,0 +1,25 @@
+{% extends "poll/base.html" %}
+
+{% block title %}Basic poll application{% endblock %}
+
+{% block main %}
+<div class="container homepage">
+    <div class="row">
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #d1d1d1;">
+                    <h3>Available polls</h3>
+                </li>
+                {% for poll in polls %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <strong>{{ poll.question }}</strong>
+                    <span class="pull-right">
+                        <a href="{% url 'vote' poll.id %}" class="btn btn-info btn-xs">Vote</a> &nbsp;
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

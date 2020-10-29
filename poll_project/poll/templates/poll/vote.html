@@ -1,0 +1,41 @@
+{% extends "poll/base.html" %}
+
+{% block title %}{{ poll.question }}{% endblock %}
+
+{% block main %}
+<div class="container homepage">
+    <div class="row">
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item" style="background-color: #d1d1d1;"><h3>Available polls</h3></li>
+                <li class="list-group-item"><strong>{{ poll.question }}</strong></li>
+                <li class="list-group-item">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="poll" value="option1" required>
+                                    {{ poll.qs_one }}
+                                </label> &nbsp;
+                                <label>
+                                    <input type="radio" name="poll" value="option2">
+                                    {{ poll.qs_two }}
+                                </label> &nbsp;
+                                <label>
+                                    <input type="radio" name="poll" value="option3">
+                                    {{ poll.qs_three }}
+                                </label> &nbsp;
+                            </div>
+                        </div>
+                        <hr />
+                        <button type="submit" class="btn btn-info">
+                            Submit
+                        </button>         
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

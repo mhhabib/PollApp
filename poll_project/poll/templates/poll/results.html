@@ -1,0 +1,61 @@
+{% extends "poll/base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block main %}
+<div class="container homepage">
+    <div class="row">
+        <div class="col chart">
+            <canvas id="myChart" height="190"></canvas>
+        </div>
+        <div class="col questions">
+            <ul class="list-group">
+                <li class="list-group-item" style="background-color: #d1d1d1;"><h3>Poll results</h3></li>
+                <li class="list-group-item"><strong>{{ poll.question }}</strong></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">{{ poll.qs_one }} <span class="badge badge-primary badge-pill">{{ poll.qs_one_cnt }}</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">{{ poll.qs_two }} <span class="badge badge-primary badge-pill">{{ poll.qs_two_cnt }}</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">{{ poll.qs_three }} <span class="badge badge-primary badge-pill">{{ poll.qs_three_cnt }}</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #dadddd;"> Total vote casted <span class="badge badge-danger badge-pill">{{ poll.total }}</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ["{{ poll.qs_one }}", "{{ poll.qs_two }}", "{{ poll.qs_three }}"],
+        datasets: [{
+            label: "Poll results",
+            backgroundColor: [
+                '#ee6f57',
+                '#00334e',
+                '#206a5d'
+            ],
+            borderColor: [
+                '#a34a39',
+                '#00263b',
+                '#065446'
+            ],
+            data: ['{{ poll.qs_one_cnt }}', '{{ poll.qs_two_cnt }}', '{{ poll.qs_three_cnt }}'],
+            borderWidth: 1
+        }],
+    },
+
+    // Configuration options go here
+     options: {
+        title: {
+            display: true,
+            text: 'Poll result chart',
+            fontSize: 24
+        },
+        legend: {
+            display: true,
+            position: 'bottom'
+        }
+    }
+});
+</script>
+{% endblock %}
