@@ -1,8 +1,10 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
+
+
 class Poll(models.Model):
-    question = models.TextField()
+    question = RichTextField(blank=True, null=True)
     qs_one = models.CharField(max_length=30)
     qs_two = models.CharField(max_length=30)
     qs_three = models.CharField(max_length=30)
@@ -12,4 +14,3 @@ class Poll(models.Model):
 
     def total(self):
         return self.qs_one_cnt + self.qs_two_cnt + self.qs_three_cnt
-

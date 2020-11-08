@@ -2,31 +2,31 @@
 {% block title %}All Results{% endblock %}
 
 {% block main %}
-{% for allres in allpolls %}
+{% for poll in allpolls %}
 <div class="container homepage">
     <div class="row">
         <div class="col questions">
             <ul class="list-group">
                 <li class="list-group-item" style="background-color: #d1d1d1;"><h3># {{ forloop.counter }}</h3></li>
-                <li class="list-group-item"><strong>{{ allres.question }}</strong></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">{{ allres.qs_one }} <span class="badge badge-primary badge-pill">{{ allres.qs_one_cnt }}</span></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">{{ allres.qs_two }} <span class="badge badge-primary badge-pill">{{ allres.qs_two_cnt }}</span></li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">{{ allres.qs_three }} <span class="badge badge-primary badge-pill">{{ allres.qs_three_cnt }}</span></li>
+                <li class="list-group-item"><strong>{{ poll.question|safe }}</strong></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">{{ poll.qs_one }} <span class="badge badge-primary badge-pill">{{ poll.qs_one_cnt }}</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">{{ poll.qs_two }} <span class="badge badge-primary badge-pill">{{ poll.qs_two_cnt }}</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">{{ poll.qs_three }} <span class="badge badge-primary badge-pill">{{ poll.qs_three_cnt }}</span></li>
                 <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #dadddd;"> Total vote casted <span class="badge badge-danger badge-pill">{{ allres.total }}</span></li>
             </ul>
         </div>
         <div class="col chart">
-            <canvas id="{{allres}}" height="180"></canvas>
+            <canvas id="{{poll}}" height="180"></canvas>
         </div>
     </div>
 </div>
 <script>
     
-    var ctx = document.getElementById("{{allres}}").getContext('2d');
+    var ctx = document.getElementById("{{poll}}").getContext('2d');
     var chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ["{{ allres.qs_one }}", "{{ allres.qs_two }}", "{{ allres.qs_three }}"],
+            labels: ["{{ poll.qs_one }}", "{{ poll.qs_two }}", "{{ poll.qs_three }}"],
             datasets: [{
                 label: "Poll results",
                 backgroundColor: [
@@ -39,7 +39,7 @@
                     '#00263b',
                     '#065446'
                 ],
-                data: ['{{ allres.qs_one_cnt }}', '{{ allres.qs_two_cnt }}', '{{ allres.qs_three_cnt }}'],
+                data: ['{{ poll.qs_one_cnt }}', '{{ poll.qs_two_cnt }}', '{{ poll.qs_three_cnt }}'],
                 borderWidth: 1
             }],
         },

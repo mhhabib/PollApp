@@ -12,7 +12,7 @@
                 </li>
                 {% for poll in polls %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <strong>{{ poll.question }}</strong>
+                    <strong>{{ poll.question|safe }}</strong>
                     <span class="pull-right">
                         <a href="{% url 'vote' poll.id %}" class="btn btn-info btn-xs">Vote</a> &nbsp;
                     </span>

@@ -8,7 +8,7 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item" style="background-color: #d1d1d1;"><h3>Available polls</h3></li>
-                <li class="list-group-item"><strong>{{ poll.question }}</strong></li>
+                <li class="list-group-item"><strong>{{ poll.question|safe }}</strong></li>
                 <li class="list-group-item">
                     <form method="POST">
                         {% csrf_token %}
