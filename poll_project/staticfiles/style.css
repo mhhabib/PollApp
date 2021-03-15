@@ -1,0 +1,10 @@
+.homepage {
+    margin-top: 80px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.chart,
+.questions {
+    margin-bottom: 5px;
+}
